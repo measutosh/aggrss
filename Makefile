@@ -25,3 +25,6 @@ stop:
 	@echo "Stopped Aggrss!"
 
 restart: stop start
+
+# export GOPATH=$HOME/devops-gallery/dev-env/go-lab
+# export PATH=$PATH:/usr/share/go:$GOPATH/bin
