@@ -49,3 +49,19 @@ func (apiCfg *apiConfig) handlerCreateFeed(w http.ResponseWriter, r *http.Reques
 	// return the custom made feed is made in models.go
 	respondWithJSON(w, 201, databaseFeedToFeed(feed))
 }
+
+
+// this one is not authenticated, so no uesr is passed
+// this handler has been hooked up in the aggrss.go
+func (apiCfg *apiConfig) handlerGetFeeds(w http.ResponseWriter, r *http.Request) {
+
+	// this feeds needs to be converted, that has been done models
+	feeds, err := apiCfg.DB.GetFeeds(r.Context())
+	if err != nil {
+		respondWithError(w, 400, fmt.Sprintf("Couldn't get all the feeds: %v", err))
+		return
+	}
+
+	// return the custom made feed is made in models.go
+	respondWithJSON(w, 201, databaseFeedsToFeeds(feeds))
+}
